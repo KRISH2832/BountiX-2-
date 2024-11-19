@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { TransactionOnExplorer } from "@/components/ExplorerLink";
-import { ABI } from "@/lib/abi/bounty_app_abi";
+import { ABI } from "@/lib/abi/bounti_x_abi";
 import { Build } from "@/lib/type/build";
 
 const FormSchema = z.object({

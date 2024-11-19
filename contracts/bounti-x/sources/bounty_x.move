@@ -1,4 +1,4 @@
-module bounty_app_addr::bounty_app {
+module bounti_x_addr::bounti_x {
     use std::bcs;
     use std::option::{Self, Option};
     use std::signer;
@@ -12,7 +12,7 @@ module bounty_app_addr::bounty_app {
     use aptos_framework::object::{Self, Object, ExtendRef, ObjectCore, create_named_object};
     use aptos_framework::primary_fungible_store;
     use aptos_framework::timestamp;
-    use bounty_app_addr::util;
+    use bounti_x_addr::util;
 
     // ======================== Error Codes ========================
     /// Only admin can set pending admin
@@ -630,8 +630,8 @@ module bounty_app_addr::bounty_app {
         if (sender == config.admin_addr) {
             true
         } else {
-            if (object::is_object(@bounty_app_addr)) {
-                let obj = object::address_to_object<ObjectCore>(@bounty_app_addr);
+            if (object::is_object(@bounti_x_addr)) {
+                let obj = object::address_to_object<ObjectCore>(@bounti_x_addr);
                 object::is_owner(obj, sender)
             } else {
                 false
@@ -640,7 +640,7 @@ module bounty_app_addr::bounty_app {
     }
 
     fun get_config_obj_addr(): address {
-        object::create_object_address(&@bounty_app_addr, CONFIG_OBJ_SEED)
+        object::create_object_address(&@bounti_x_addr, CONFIG_OBJ_SEED)
     }
 
     fun get_config_signer(): signer acquires ConfigController {

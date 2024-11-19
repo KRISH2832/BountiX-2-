@@ -12,6 +12,6 @@ CONTRACT_ADDRESS=$(cat contract_address.txt)
 
 aptos move upgrade-object-package \
   --object-address $CONTRACT_ADDRESS \
-  --named-addresses bounty_app_addr=$CONTRACT_ADDRESS \
+  --named-addresses bounti_x_addr=$CONTRACT_ADDRESS \
   --profile $PUBLISHER_PROFILE \
   --assume-yes --skip-fetch-latest-git-deps

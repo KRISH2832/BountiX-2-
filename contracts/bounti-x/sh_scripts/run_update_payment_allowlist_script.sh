@@ -8,7 +8,7 @@ CONTRACT_ADDRESS=$(cat contract_address.txt)
 
 # Need to compile the package first
 aptos move compile \
-  --skip-fetch-latest-git-deps --named-addresses bounty_app_addr=$CONTRACT_ADDRESS
+  --skip-fetch-latest-git-deps --named-addresses bounti_x_addr=$CONTRACT_ADDRESS
 
 # Profile is the account you used to execute transaction
 # Run "aptos init" to create the profile, then get the profile name from .aptos/config.yaml

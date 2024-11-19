@@ -10,7 +10,7 @@ import {
 import { createSurfClient } from "@thalalabs/surf";
 import { Client } from "pg";
 
-import { ABI } from "./abi/bounty_app_abi";
+import { ABI } from "./abi/bounti_x_abi";
 
 const APTOS_CLIENT = new Aptos(
   new AptosConfig({

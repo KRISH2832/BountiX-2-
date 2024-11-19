@@ -1,5 +1,5 @@
 #[test_only]
-module bounty_app_addr::test_end_to_end {
+module bounti_x_addr::test_end_to_end {
     use std::option;
     use std::signer;
     use std::string;
@@ -9,15 +9,15 @@ module bounty_app_addr::test_end_to_end {
     use aptos_framework::fungible_asset;
     use aptos_framework::object;
     use aptos_framework::primary_fungible_store;
-    use bounty_app_addr::bounty_app::exists_build;
+    use bounti_x_addr::bounti_x::exists_build;
 
-    use bounty_app_addr::bounty_app;
+    use bounti_x_addr::bounti_x;
 
     const MAX_TIMESTAMP: u64 = 2147483647;
 
-    #[test(aptos_framework = @0x1, sender = @bounty_app_addr, user1 = @0x101, user2 = @0x102)]
+    #[test(aptos_framework = @0x1, sender = @bounti_x_addr, user1 = @0x101, user2 = @0x102)]
     fun test_end_to_end(aptos_framework: &signer, sender: &signer, user1: &signer, user2: &signer) {
-        bounty_app::init_module_for_test(aptos_framework, sender);
+        bounti_x::init_module_for_test(aptos_framework, sender);
 
         let sender_addr = signer::address_of(sender);
         let user1_addr = signer::address_of(user1);
@@ -35,13 +35,13 @@ module bounty_app_addr::test_end_to_end {
         );
         let dummy_fa_metadata = object::object_from_constructor_ref(dummy_fa_metadata_constructor_ref);
 
-        bounty_app::add_to_payment_allowlist(sender, dummy_fa_metadata);
+        bounti_x::add_to_payment_allowlist(sender, dummy_fa_metadata);
 
         let mint_ref = &fungible_asset::generate_mint_ref(dummy_fa_metadata_constructor_ref);
         let fa = fungible_asset::mint(mint_ref, 100);
         primary_fungible_store::deposit(user1_addr, fa);
 
-        bounty_app::entry_create_bounty(
+        bounti_x::entry_create_bounty(
             user1,
             string::utf8(b"title"),
             string::utf8(b"link"),
@@ -54,7 +54,7 @@ module bounty_app_addr::test_end_to_end {
             string::utf8(b"contact @apt_to_the_moon on twitter")
         );
         let events = event::emitted_events();
-        let bounty_obj = bounty_app::get_bounty_obj_from_create_bounty_event(vector::borrow(&events, 0));
+        let bounty_obj = bounti_x::get_bounty_obj_from_create_bounty_event(vector::borrow(&events, 0));
         let (
             creator,
             create_timestamp,
@@ -69,7 +69,7 @@ module bounty_app_addr::test_end_to_end {
             winner_count,
             winner_limit,
             contact_info,
-        ) = bounty_app::get_bounty_detail(bounty_obj);
+        ) = bounti_x::get_bounty_detail(bounty_obj);
         assert!(creator == user1_addr, 1);
         assert!(create_timestamp == 0, 1);
         assert!(last_update_timestamp == 0, 1);
@@ -84,9 +84,9 @@ module bounty_app_addr::test_end_to_end {
         assert!(winner_limit == 2, 1);
         assert!(contact_info == string::utf8(b"contact @apt_to_the_moon on twitter"), 1);
 
-        bounty_app::create_build(user2, option::none(), bounty_obj);
+        bounti_x::create_build(user2, option::none(), bounty_obj);
         let events = event::emitted_events();
-        let build_obj = bounty_app::get_build_obj_from_create_build_event(vector::borrow(&events, 0));
+        let build_obj = bounti_x::get_build_obj_from_create_build_event(vector::borrow(&events, 0));
         let (
             creator,
             payment_recipient,
@@ -96,7 +96,7 @@ module bounty_app_addr::test_end_to_end {
             proof_link,
             bounty_object_from_build,
             status,
-        ) = bounty_app::get_build_detail(build_obj);
+        ) = bounti_x::get_build_detail(build_obj);
         assert!(creator == user2_addr, 2);
         assert!(payment_recipient == user2_addr, 2);
         assert!(build_payment_amount == 0, 2);
@@ -108,23 +108,23 @@ module bounty_app_addr::test_end_to_end {
 
         assert!(exists_build(bounty_obj, user2_addr), 2);
 
-        bounty_app::submit_build_for_review(user2, build_obj, string::utf8(b"build_proof_link"));
-        let (_, _, _, _, _, proof_link, _, status) = bounty_app::get_build_detail(build_obj);
+        bounti_x::submit_build_for_review(user2, build_obj, string::utf8(b"build_proof_link"));
+        let (_, _, _, _, _, proof_link, _, status) = bounti_x::get_build_detail(build_obj);
         assert!(proof_link == string::utf8(b"build_proof_link"), 3);
         assert!(status == 2, 3);
 
-        bounty_app::accept_build(user1, build_obj);
+        bounti_x::accept_build(user1, build_obj);
         let events = event::emitted_events();
-        let build_obj = bounty_app::get_build_obj_from_accept_build_event(vector::borrow(&events, 0));
-        let (_, _, _, _, _, _, _, status) = bounty_app::get_build_detail(build_obj);
+        let build_obj = bounti_x::get_build_obj_from_accept_build_event(vector::borrow(&events, 0));
+        let (_, _, _, _, _, _, _, status) = bounti_x::get_build_detail(build_obj);
         assert!(status == 4, 4);
         assert!(primary_fungible_store::balance(user2_addr, dummy_fa_metadata) == 50, 4);
 
-        let (payment_fa_metadatas, total_payment_amounts) = bounty_app::get_payment_allowlist();
+        let (payment_fa_metadatas, total_payment_amounts) = bounti_x::get_payment_allowlist();
         assert!(payment_fa_metadatas == vector[dummy_fa_metadata], 5);
         assert!(total_payment_amounts == vector[100], 5);
 
-        bounty_app::end_bounty(user1, bounty_obj);
+        bounti_x::end_bounty(user1, bounty_obj);
         assert!(primary_fungible_store::balance(user1_addr, dummy_fa_metadata) == 50, 6);
     }
 }

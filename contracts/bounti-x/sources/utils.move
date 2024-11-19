@@ -1,4 +1,4 @@
-module bounty_app_addr::util {
+module bounti_x_addr::util {
     use std::signer;
 
     use aptos_framework::aptos_coin::AptosCoin;

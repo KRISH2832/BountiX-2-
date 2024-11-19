@@ -8,7 +8,7 @@ import { getAptosClient } from "@/lib/aptos";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { TransactionOnExplorer } from "@/components/ExplorerLink";
-import { ABI } from "@/lib/abi/bounty_app_abi";
+import { ABI } from "@/lib/abi/bounti_x_abi";
 
 interface CreateBuildProps {
   bountyObjAddr: `0x${string}`;

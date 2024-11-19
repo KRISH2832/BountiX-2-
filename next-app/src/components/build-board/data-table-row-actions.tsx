@@ -15,7 +15,7 @@ import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getBountyOnServer } from "@/app/actions";
 import { useWalletClient } from "@thalalabs/surf/hooks";
-import { ABI } from "@/lib/abi/bounty_app_abi";
+import { ABI } from "@/lib/abi/bounti_x_abi";
 import { useToast } from "@/components/ui/use-toast";
 import { getAptosClient } from "@/lib/aptos";
 import { TransactionOnExplorer } from "@/components/ExplorerLink";

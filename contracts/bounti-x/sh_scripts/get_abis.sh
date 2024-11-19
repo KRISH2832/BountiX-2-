@@ -4,7 +4,7 @@ NETWORK=testnet
 
 CONTRACT_ADDRESS=$(cat ./contract_address.txt)
 
-MODULE_NAME=bounty_app
+MODULE_NAME=bounti_x
 
 ABI="export const ABI = $(curl https://fullnode.$NETWORK.aptoslabs.com/v1/accounts/$CONTRACT_ADDRESS/module/$MODULE_NAME | sed -n 's/.*"abi":\({.*}\).*}$/\1/p') as const" 
 
