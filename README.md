@@ -20,6 +20,11 @@
    - An integrated analytics dashboard powered by a custom indexer provides insights into platform activity and performance.
 
 
+### Local Setup:
+
+For next app - https://github.com/KRISH2832/BountiX-2-/blob/main/next-app/README.md
+For move contracts - https://github.com/KRISH2832/BountiX-2-/blob/main/contracts/bounti-x/README.MD
+
 ### Inspiration:
 BountiX draws from the success of platforms like Bountycaster and Gib.work to create a comprehensive bounty ecosystem specifically tailored to the Aptos blockchain.
 
